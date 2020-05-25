@@ -294,9 +294,8 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Partials\SiteLayout\_Footer.cshtml" />
-    <Content Include="Views\Partials\Home\_Featured.cshtml" />
-    <Content Include="Views\Partials\Home\_Services.cshtml" />
-    <Content Include="Views\Partials\SiteLayout\_Intro.cshtml" />
+    <Content Include="Views\Partials\Home\_Popular.cshtml" />
+    <Content Include="Views\Partials\Home\_Hero.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -353,6 +352,11 @@
     <Content Include="Views\Partials\SiteLayout\_Header.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Article.cshtml" />
+    <Content Include="Views\Partials\Home\_Instagram.cshtml" />
+    <Content Include="Views\Blog.cshtml" />
+    <Content Include="Views\Contact.cshtml" />
+    <Content Include="Views\Content.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

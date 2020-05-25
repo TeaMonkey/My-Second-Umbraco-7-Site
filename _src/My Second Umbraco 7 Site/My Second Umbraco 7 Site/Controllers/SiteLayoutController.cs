@@ -21,9 +21,14 @@ namespace My_Second_Umbraco_7_Site.Controllers
             return PartialView($"{PartialViewDir}_Footer.cshtml");
         }
 
-        public ActionResult RenderIntro()
+        public ActionResult RenderSignup()
         {
-            return PartialView($"{PartialViewDir}_Intro.cshtml");
+            return PartialView($"{PartialViewDir}_Signup.cshtml");
+        }
+
+        public ActionResult RenderExpandedHeader()
+        {
+            return PartialView($"{PartialViewDir}_ExpandedHeader.cshtml");
         }
     }
 }

@@ -11,14 +11,19 @@ namespace My_Second_Umbraco_7_Site.Controllers
     {
         private const string PartialViewDir = "~/Views/Partials/Home/";
 
-        public ActionResult RenderFeatured()
+        public ActionResult RenderHero()
         {
-            return PartialView($"{PartialViewDir}_Featured.cshtml");
+            return PartialView($"{PartialViewDir}_Hero.cshtml");
         }
 
-        public ActionResult RenderServices()
+        public ActionResult RenderPopular()
         {
-            return PartialView($"{PartialViewDir}_Services.cshtml");
+            return PartialView($"{PartialViewDir}_Popular.cshtml");
+        }
+
+        public ActionResult RenderInstagram()
+        {
+            return PartialView($"{PartialViewDir}_Instagram.cshtml");
         }
     }
 }

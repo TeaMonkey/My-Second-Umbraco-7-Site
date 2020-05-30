@@ -45,13 +45,13 @@ namespace My_Second_Umbraco_7_Site.Controllers
             return nav;
         }
 
-        private List<NavigationListItem> GetChildNavigationList(dynamic page)
+        private List<NavigationListItem> GetChildNavigationList(IPublishedContent page)
         {
             List<NavigationListItem> listItems = new List<NavigationListItem>();
 
             var childPages = page.Children;
 
-            if (childPages != null && childPages.Count > 0)
+            if (childPages != null && childPages.Count() > 0)
             {
                 foreach (var childPage in childPages)
                 {

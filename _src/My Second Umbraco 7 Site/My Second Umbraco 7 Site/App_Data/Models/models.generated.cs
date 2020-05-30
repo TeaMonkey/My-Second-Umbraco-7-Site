@@ -19,7 +19,7 @@ using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "5f0d984f47f021a8")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "a8ad0abff547ebf2")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 namespace Umbraco.Web.PublishedContentModels
@@ -52,7 +52,7 @@ namespace Umbraco.Web.PublishedContentModels
 
 	/// <summary>Blog</summary>
 	[PublishedContentModel("blog")]
-	public partial class Blog : PublishedContentModel
+	public partial class Blog : PublishedContentModel, ISubHeaderControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "blog";
@@ -74,11 +74,20 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 		}
+
+		///<summary>
+		/// Large Heading: A large section heading that takes up the full width of the site
+		///</summary>
+		[ImplementPropertyType("largeHeading")]
+		public string LargeHeading
+		{
+			get { return Umbraco.Web.PublishedContentModels.SubHeaderControls.GetLargeHeading(this); }
+		}
 	}
 
 	/// <summary>Contact</summary>
 	[PublishedContentModel("contact")]
-	public partial class Contact : PublishedContentModel
+	public partial class Contact : PublishedContentModel, ISubHeaderControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "contact";
@@ -100,11 +109,20 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 		}
+
+		///<summary>
+		/// Large Heading: A large section heading that takes up the full width of the site
+		///</summary>
+		[ImplementPropertyType("largeHeading")]
+		public string LargeHeading
+		{
+			get { return Umbraco.Web.PublishedContentModels.SubHeaderControls.GetLargeHeading(this); }
+		}
 	}
 
 	/// <summary>Content</summary>
 	[PublishedContentModel("content")]
-	public partial class Content : PublishedContentModel
+	public partial class Content : PublishedContentModel, ISubHeaderControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "content";
@@ -126,6 +144,61 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 		}
+
+		///<summary>
+		/// Large Heading: A large section heading that takes up the full width of the site
+		///</summary>
+		[ImplementPropertyType("largeHeading")]
+		public string LargeHeading
+		{
+			get { return Umbraco.Web.PublishedContentModels.SubHeaderControls.GetLargeHeading(this); }
+		}
+	}
+
+	// Mixin content Type 1088 with alias "subHeaderControls"
+	/// <summary>Large Heading Controls</summary>
+	public partial interface ISubHeaderControls : IPublishedContent
+	{
+		/// <summary>Large Heading</summary>
+		string LargeHeading { get; }
+	}
+
+	/// <summary>Large Heading Controls</summary>
+	[PublishedContentModel("subHeaderControls")]
+	public partial class SubHeaderControls : PublishedContentModel, ISubHeaderControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "subHeaderControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public SubHeaderControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<SubHeaderControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Large Heading: A large section heading that takes up the full width of the site
+		///</summary>
+		[ImplementPropertyType("largeHeading")]
+		public string LargeHeading
+		{
+			get { return GetLargeHeading(this); }
+		}
+
+		/// <summary>Static getter for Large Heading</summary>
+		public static string GetLargeHeading(ISubHeaderControls that) { return that.GetPropertyValue<string>("largeHeading"); }
 	}
 
 	/// <summary>Folder</summary>

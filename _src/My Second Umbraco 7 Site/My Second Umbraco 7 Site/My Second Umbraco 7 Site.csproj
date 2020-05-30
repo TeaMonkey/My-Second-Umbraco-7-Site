@@ -356,11 +356,11 @@
     <Content Include="Views\Partials\SiteLayout\_Header.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-    <Content Include="Views\Article.cshtml" />
     <Content Include="Views\Partials\Home\_Instagram.cshtml" />
     <Content Include="Views\Blog.cshtml" />
     <Content Include="Views\Contact.cshtml" />
     <Content Include="Views\Content.cshtml" />
+    <Content Include="Views\Partials\SiteLayout\_LargeHeaderControl.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

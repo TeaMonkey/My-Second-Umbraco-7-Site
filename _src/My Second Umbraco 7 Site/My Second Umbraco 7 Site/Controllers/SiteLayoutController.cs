@@ -34,6 +34,11 @@ namespace My_Second_Umbraco_7_Site.Controllers
             return PartialView($"{PartialViewDir}_ExpandedHeader.cshtml");
         }
 
+        public ActionResult RenderLargeHeadingControl()
+        {
+            return PartialView($"{PartialViewDir}_LargeHeaderControl.cshtml");
+        }
+
         private List<NavigationListItem> GetNavigationModelFromUmbraco()
         {
             IPublishedContent homePage = Umbraco.TypedContentAtRoot().First();

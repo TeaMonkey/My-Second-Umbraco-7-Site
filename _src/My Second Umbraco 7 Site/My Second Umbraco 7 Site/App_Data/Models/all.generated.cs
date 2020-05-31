@@ -8,7 +8,7 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "a8ad0abff547ebf2")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "256855828ff7defc")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 
@@ -138,7 +138,7 @@ namespace Umbraco.Web.PublishedContentModels
 
 	/// <summary>Content</summary>
 	[PublishedContentModel("content")]
-	public partial class Content : PublishedContentModel, ISubHeaderControls
+	public partial class Content : PublishedContentModel, IBasicContentControls, ISubHeaderControls, ITopNavigationControl
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "content";
@@ -162,12 +162,30 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Content Grid: Enter the content for the page
+		///</summary>
+		[ImplementPropertyType("contentGrid")]
+		public Newtonsoft.Json.Linq.JToken ContentGrid
+		{
+			get { return Umbraco.Web.PublishedContentModels.BasicContentControls.GetContentGrid(this); }
+		}
+
+		///<summary>
 		/// Large Heading: A large section heading that takes up the full width of the site
 		///</summary>
 		[ImplementPropertyType("largeHeading")]
 		public string LargeHeading
 		{
 			get { return Umbraco.Web.PublishedContentModels.SubHeaderControls.GetLargeHeading(this); }
+		}
+
+		///<summary>
+		/// Exclude From Top Navigation: Tick this if you don't want this page to appear in the top navigation
+		///</summary>
+		[ImplementPropertyType("excludeFromTopNavigation")]
+		public bool ExcludeFromTopNavigation
+		{
+			get { return Umbraco.Web.PublishedContentModels.TopNavigationControl.GetExcludeFromTopNavigation(this); }
 		}
 	}
 
@@ -215,6 +233,98 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Static getter for Large Heading</summary>
 		public static string GetLargeHeading(ISubHeaderControls that) { return that.GetPropertyValue<string>("largeHeading"); }
+	}
+
+	// Mixin content Type 1091 with alias "basicContentControls"
+	/// <summary>Basic Content Controls</summary>
+	public partial interface IBasicContentControls : IPublishedContent
+	{
+		/// <summary>Content Grid</summary>
+		Newtonsoft.Json.Linq.JToken ContentGrid { get; }
+	}
+
+	/// <summary>Basic Content Controls</summary>
+	[PublishedContentModel("basicContentControls")]
+	public partial class BasicContentControls : PublishedContentModel, IBasicContentControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "basicContentControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public BasicContentControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<BasicContentControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Content Grid: Enter the content for the page
+		///</summary>
+		[ImplementPropertyType("contentGrid")]
+		public Newtonsoft.Json.Linq.JToken ContentGrid
+		{
+			get { return GetContentGrid(this); }
+		}
+
+		/// <summary>Static getter for Content Grid</summary>
+		public static Newtonsoft.Json.Linq.JToken GetContentGrid(IBasicContentControls that) { return that.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("contentGrid"); }
+	}
+
+	// Mixin content Type 1093 with alias "topNavigationControl"
+	/// <summary>Top Navigation Control</summary>
+	public partial interface ITopNavigationControl : IPublishedContent
+	{
+		/// <summary>Exclude From Top Navigation</summary>
+		bool ExcludeFromTopNavigation { get; }
+	}
+
+	/// <summary>Top Navigation Control</summary>
+	[PublishedContentModel("topNavigationControl")]
+	public partial class TopNavigationControl : PublishedContentModel, ITopNavigationControl
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "topNavigationControl";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public TopNavigationControl(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<TopNavigationControl, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Exclude From Top Navigation: Tick this if you don't want this page to appear in the top navigation
+		///</summary>
+		[ImplementPropertyType("excludeFromTopNavigation")]
+		public bool ExcludeFromTopNavigation
+		{
+			get { return GetExcludeFromTopNavigation(this); }
+		}
+
+		/// <summary>Static getter for Exclude From Top Navigation</summary>
+		public static bool GetExcludeFromTopNavigation(ITopNavigationControl that) { return that.GetPropertyValue<bool>("excludeFromTopNavigation"); }
 	}
 
 	/// <summary>Folder</summary>

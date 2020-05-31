@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Umbraco.Core.Models;
+using Umbraco.Web;
 using Umbraco.Web.Mvc;
 
 namespace My_Second_Umbraco_7_Site.Controllers
@@ -54,7 +55,7 @@ namespace My_Second_Umbraco_7_Site.Controllers
         {
             List<NavigationListItem> listItems = new List<NavigationListItem>();
 
-            var childPages = page.Children;
+            var childPages = page.Children.Where(x => (x.HasValue("excludeFromTopNavigation") && x.GetPropertyValue<bool>("excludeFromTopNavigation") != true) || !x.HasValue("excludeFromTopNavigation"));
 
             if (childPages != null && childPages.Count() > 0)
             {

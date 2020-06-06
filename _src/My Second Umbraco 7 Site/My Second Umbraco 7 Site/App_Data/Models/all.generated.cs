@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "256855828ff7defc")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "497203b7ce960d12")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
 // FILE: models.generated.cs
@@ -42,7 +42,7 @@ namespace Umbraco.Web.PublishedContentModels
 {
 	/// <summary>Home</summary>
 	[PublishedContentModel("home")]
-	public partial class Home : PublishedContentModel
+	public partial class Home : PublishedContentModel, IHero
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "home";
@@ -63,6 +63,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Home, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Slider
+		///</summary>
+		[ImplementPropertyType("slider")]
+		public IEnumerable<IPublishedContent> Slider
+		{
+			get { return Umbraco.Web.PublishedContentModels.Hero.GetSlider(this); }
 		}
 	}
 
@@ -325,6 +334,114 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Static getter for Exclude From Top Navigation</summary>
 		public static bool GetExcludeFromTopNavigation(ITopNavigationControl that) { return that.GetPropertyValue<bool>("excludeFromTopNavigation"); }
+	}
+
+	/// <summary>Slide</summary>
+	[PublishedContentModel("slide")]
+	public partial class Slide : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "slide";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public Slide(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Slide, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Image
+		///</summary>
+		[ImplementPropertyType("image")]
+		public IPublishedContent Image
+		{
+			get { return this.GetPropertyValue<IPublishedContent>("image"); }
+		}
+
+		///<summary>
+		/// Link
+		///</summary>
+		[ImplementPropertyType("link")]
+		public string Link
+		{
+			get { return this.GetPropertyValue<string>("link"); }
+		}
+
+		///<summary>
+		/// Text
+		///</summary>
+		[ImplementPropertyType("text")]
+		public string Text
+		{
+			get { return this.GetPropertyValue<string>("text"); }
+		}
+
+		///<summary>
+		/// Title
+		///</summary>
+		[ImplementPropertyType("title")]
+		public string Title
+		{
+			get { return this.GetPropertyValue<string>("title"); }
+		}
+	}
+
+	// Mixin content Type 1106 with alias "hero"
+	/// <summary>Hero</summary>
+	public partial interface IHero : IPublishedContent
+	{
+		/// <summary>Slider</summary>
+		IEnumerable<IPublishedContent> Slider { get; }
+	}
+
+	/// <summary>Hero</summary>
+	[PublishedContentModel("hero")]
+	public partial class Hero : PublishedContentModel, IHero
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "hero";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public Hero(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Hero, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Slider
+		///</summary>
+		[ImplementPropertyType("slider")]
+		public IEnumerable<IPublishedContent> Slider
+		{
+			get { return GetSlider(this); }
+		}
+
+		/// <summary>Static getter for Slider</summary>
+		public static IEnumerable<IPublishedContent> GetSlider(IHero that) { return that.GetPropertyValue<IEnumerable<IPublishedContent>>("slider"); }
 	}
 
 	/// <summary>Folder</summary>

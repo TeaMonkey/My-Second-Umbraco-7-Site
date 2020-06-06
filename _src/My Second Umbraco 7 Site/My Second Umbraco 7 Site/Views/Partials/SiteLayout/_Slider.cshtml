@@ -1,0 +1,44 @@
+﻿@inherits UmbracoViewPage
+
+@{
+    //TODO: Convert to model based
+
+
+    IEnumerable<IPublishedContent> slider = Umbraco.AssignedContentItem.GetPropertyValue<IEnumerable<IPublishedContent>>("Slider");
+}
+
+@if (slider != null && slider.Any())
+{
+    foreach (IPublishedContent slide in slider.Where(x => x.IsVisible()))
+    {
+        string title = slide.GetPropertyValue<string>("title");
+        string text = slide.HasValue("text") ? slide.GetPropertyValue<string>("text") : "";
+        string imageUrl = slide.HasValue("image") ? slide.GetPropertyValue<IPublishedContent>("image").Url : "/images/img_bg_1.jpg";   //TODO: Add fallback image and restrict image sizes
+        string link = slide.HasValue("link") ? slide.GetPropertyValue<string>("link") : "";
+
+        //TODO: Swap out the text box for a page link thing
+        //IEnumerable<RelatedLink> links = slide.GetPropertyValue<IEnumerable<RelatedLink>>("slideLink");
+        //RelatedLink link = links != null ? links.FirstOrDefault() : null;
+
+        <div class="col-md-8">
+            <div class="flexslider animate-box">
+                <ul class="slides">
+                    <li style="background-image: url('@imageUrl');">
+                        <div class="overlay-gradient"></div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1 slider-text">
+                                    <div class="slider-text-inner">
+                                        <h1>@title</h1>
+                                        <h2>@text</h2>
+                                        <p class="ct">@link</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+}

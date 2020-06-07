@@ -1,7 +1,8 @@
 ﻿@inherits UmbracoViewPage
+@using Umbraco.Web.Models
 
 @{
-    //TODO: Convert to model based
+    //TODO: Convert to model based.
 
 
     IEnumerable<IPublishedContent> slider = Umbraco.AssignedContentItem.GetPropertyValue<IEnumerable<IPublishedContent>>("Slider");
@@ -9,20 +10,17 @@
 
 @if (slider != null && slider.Any())
 {
-    foreach (IPublishedContent slide in slider.Where(x => x.IsVisible()))
-    {
-        string title = slide.GetPropertyValue<string>("title");
-        string text = slide.HasValue("text") ? slide.GetPropertyValue<string>("text") : "";
-        string imageUrl = slide.HasValue("image") ? slide.GetPropertyValue<IPublishedContent>("image").Url : "/images/img_bg_1.jpg";   //TODO: Add fallback image and restrict image sizes
-        string link = slide.HasValue("link") ? slide.GetPropertyValue<string>("link") : "";
+    <div class="col-md-8">
+        <div class="flexslider animate-box">
+            <ul class="slides">
+                @foreach (IPublishedContent slide in slider.Where(x => x.IsVisible()))
+                {
+                    string title = slide.GetPropertyValue<string>("title");
+                    string text = slide.HasValue("text") ? slide.GetPropertyValue<string>("text") : "";
+                    string imageUrl = slide.HasValue("image") ? slide.GetPropertyValue<IPublishedContent>("image").Url : "/images/img_bg_1.jpg";   //TODO: Add fallback image
+                    var links = slide.GetPropertyValue<RelatedLinks>("link");
+                    var link = links != null ? links.FirstOrDefault() : null;
 
-        //TODO: Swap out the text box for a page link thing
-        //IEnumerable<RelatedLink> links = slide.GetPropertyValue<IEnumerable<RelatedLink>>("slideLink");
-        //RelatedLink link = links != null ? links.FirstOrDefault() : null;
-
-        <div class="col-md-8">
-            <div class="flexslider animate-box">
-                <ul class="slides">
                     <li style="background-image: url('@imageUrl');">
                         <div class="overlay-gradient"></div>
                         <div class="container-fluid">
@@ -31,14 +29,18 @@
                                     <div class="slider-text-inner">
                                         <h1>@title</h1>
                                         <h2>@text</h2>
-                                        <p class="ct">@link</p>
+                                        @if (link != null)
+                                        {
+                                            var linkTarget = (link.NewWindow) ? "_blank" : null;
+                                            <p class="ct"><a href="@link.Link" target="@linkTarget">@link.Caption <i class="icon-arrow-right"></i></a></p>
+                                        }
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li>
-                </ul>
-            </div>
+                }
+            </ul>
         </div>
-    }
+    </div>
 }

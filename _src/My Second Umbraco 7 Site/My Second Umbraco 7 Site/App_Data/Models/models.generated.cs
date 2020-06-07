@@ -19,7 +19,7 @@ using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "497203b7ce960d12")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "ba37cc809fe62a53")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 namespace Umbraco.Web.PublishedContentModels
@@ -358,9 +358,9 @@ namespace Umbraco.Web.PublishedContentModels
 		/// Link
 		///</summary>
 		[ImplementPropertyType("link")]
-		public string Link
+		public Umbraco.Web.Models.RelatedLinks Link
 		{
-			get { return this.GetPropertyValue<string>("link"); }
+			get { return this.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("link"); }
 		}
 
 		///<summary>

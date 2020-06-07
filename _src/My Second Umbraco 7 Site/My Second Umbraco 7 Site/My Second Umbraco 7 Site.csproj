@@ -362,6 +362,7 @@
     <Content Include="Views\Content.cshtml" />
     <Content Include="Views\Partials\SiteLayout\_LargeHeaderControl.cshtml" />
     <Content Include="Views\Partials\SiteLayout\_Slider.cshtml" />
+    <Content Include="Views\Partials\SiteLayout\_FeaturedItems.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

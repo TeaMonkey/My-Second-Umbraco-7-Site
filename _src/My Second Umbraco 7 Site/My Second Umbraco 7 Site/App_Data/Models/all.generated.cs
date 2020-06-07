@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "ba37cc809fe62a53")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "696224c7fca98248")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.3")]
 
 
 // FILE: models.generated.cs
@@ -63,6 +63,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Home, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Featured Items
+		///</summary>
+		[ImplementPropertyType("featuredItems")]
+		public IEnumerable<IPublishedContent> FeaturedItems
+		{
+			get { return Umbraco.Web.PublishedContentModels.Hero.GetFeaturedItems(this); }
 		}
 
 		///<summary>
@@ -402,6 +411,9 @@ namespace Umbraco.Web.PublishedContentModels
 	/// <summary>Hero</summary>
 	public partial interface IHero : IPublishedContent
 	{
+		/// <summary>Featured Items</summary>
+		IEnumerable<IPublishedContent> FeaturedItems { get; }
+
 		/// <summary>Slider</summary>
 		IEnumerable<IPublishedContent> Slider { get; }
 	}
@@ -432,6 +444,18 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Featured Items
+		///</summary>
+		[ImplementPropertyType("featuredItems")]
+		public IEnumerable<IPublishedContent> FeaturedItems
+		{
+			get { return GetFeaturedItems(this); }
+		}
+
+		/// <summary>Static getter for Featured Items</summary>
+		public static IEnumerable<IPublishedContent> GetFeaturedItems(IHero that) { return that.GetPropertyValue<IEnumerable<IPublishedContent>>("featuredItems"); }
+
+		///<summary>
 		/// Slider
 		///</summary>
 		[ImplementPropertyType("slider")]
@@ -442,6 +466,77 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Static getter for Slider</summary>
 		public static IEnumerable<IPublishedContent> GetSlider(IHero that) { return that.GetPropertyValue<IEnumerable<IPublishedContent>>("slider"); }
+	}
+
+	/// <summary>Featured Item</summary>
+	[PublishedContentModel("featuredItem")]
+	public partial class FeaturedItem : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "featuredItem";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public FeaturedItem(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<FeaturedItem, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Category
+		///</summary>
+		[ImplementPropertyType("category")]
+		public string Category
+		{
+			get { return this.GetPropertyValue<string>("category"); }
+		}
+
+		///<summary>
+		/// Date
+		///</summary>
+		[ImplementPropertyType("date")]
+		public DateTime Date
+		{
+			get { return this.GetPropertyValue<DateTime>("date"); }
+		}
+
+		///<summary>
+		/// Image
+		///</summary>
+		[ImplementPropertyType("image")]
+		public IPublishedContent Image
+		{
+			get { return this.GetPropertyValue<IPublishedContent>("image"); }
+		}
+
+		///<summary>
+		/// Link
+		///</summary>
+		[ImplementPropertyType("link")]
+		public Umbraco.Web.Models.RelatedLinks Link
+		{
+			get { return this.GetPropertyValue<Umbraco.Web.Models.RelatedLinks>("link"); }
+		}
+
+		///<summary>
+		/// Title
+		///</summary>
+		[ImplementPropertyType("title")]
+		public string Title
+		{
+			get { return this.GetPropertyValue<string>("title"); }
+		}
 	}
 
 	/// <summary>Folder</summary>

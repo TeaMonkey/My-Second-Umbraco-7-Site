@@ -1,0 +1,33 @@
+﻿@inherits UmbracoViewPage
+@using Umbraco.Web.Models
+
+@{
+    //TODO: Convert to model based.
+
+
+    IEnumerable<IPublishedContent> items = Umbraco.AssignedContentItem.GetPropertyValue<IEnumerable<IPublishedContent>>("FeaturedItems");
+}
+
+@if (items != null && items.Any())
+{
+    <div class="col-md-4">
+        @foreach (IPublishedContent item in items.Where(x => x.IsVisible()))
+        {
+            string title = item.GetPropertyValue<string>("title");
+            string category = item.HasValue("category") ? item.GetPropertyValue<string>("category") : "";
+            DateTime date = item.HasValue("date") ? item.GetPropertyValue<DateTime>("date") : DateTime.UtcNow;
+            string imageUrl = item.HasValue("image") ? item.GetPropertyValue<IPublishedContent>("image").Url : "/images/img_bg_1.jpg";   //TODO: Add fallback image
+            var links = item.GetPropertyValue<RelatedLinks>("link");
+            var link = links != null ? links.FirstOrDefault() : new RelatedLink();
+            var linkTarget = (link != null && link.NewWindow) ? "_blank" : null;
+
+            <a href="@link.Link" class="featured text-center animate-box" style="background-image: url('@imageUrl');" target="@linkTarget">
+                <div class="desc">
+                    <span class="date">@date.ToString("dd MMMM, yyyy")</span>
+                    <h3>@title</h3>
+                    <span class="category">@category</span>
+                </div>
+            </a>
+        }
+    </div>
+}

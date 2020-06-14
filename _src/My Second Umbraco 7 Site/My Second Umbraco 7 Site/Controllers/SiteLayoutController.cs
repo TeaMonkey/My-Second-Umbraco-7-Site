@@ -55,7 +55,7 @@ namespace My_Second_Umbraco_7_Site.Controllers
         {
             List<NavigationListItem> listItems = new List<NavigationListItem>();
 
-            var childPages = page.Children.Where(x => (x.HasValue("excludeFromTopNavigation") && x.GetPropertyValue<bool>("excludeFromTopNavigation") != true) || !x.HasValue("excludeFromTopNavigation"));
+            var childPages = page.Children.Where(x => (x.HasValue("excludeFromTopNavigation") && x.GetPropertyValue<bool>("excludeFromTopNavigation") != true) || !x.HasValue("excludeFromTopNavigation"));// & x.Level <= 2);  //todo: Change so that only outputs blog categores in the blog sub menu and not the blog posts
 
             if (childPages != null && childPages.Count() > 0)
             {

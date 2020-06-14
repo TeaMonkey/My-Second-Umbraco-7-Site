@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "696224c7fca98248")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.3")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "b4a6fa8d374dcf24")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
 // FILE: models.generated.cs
@@ -536,6 +536,153 @@ namespace Umbraco.Web.PublishedContentModels
 		public string Title
 		{
 			get { return this.GetPropertyValue<string>("title"); }
+		}
+	}
+
+	// Mixin content Type 1115 with alias "articleControls"
+	/// <summary>Article Controls</summary>
+	public partial interface IArticleControls : IPublishedContent
+	{
+		/// <summary>Article Category</summary>
+		string ArticleCategory { get; }
+
+		/// <summary>Article Intro</summary>
+		string ArticleIntro { get; }
+
+		/// <summary>Atricle Publish Date</summary>
+		DateTime AtriclePublishDate { get; }
+	}
+
+	/// <summary>Article Controls</summary>
+	[PublishedContentModel("articleControls")]
+	public partial class ArticleControls : PublishedContentModel, IArticleControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "articleControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public ArticleControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ArticleControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Article Category: Enter a category for the article
+		///</summary>
+		[ImplementPropertyType("articleCategory")]
+		public string ArticleCategory
+		{
+			get { return GetArticleCategory(this); }
+		}
+
+		/// <summary>Static getter for Article Category</summary>
+		public static string GetArticleCategory(IArticleControls that) { return that.GetPropertyValue<string>("articleCategory"); }
+
+		///<summary>
+		/// Article Intro: Enter the text to use as the introduction
+		///</summary>
+		[ImplementPropertyType("articleIntro")]
+		public string ArticleIntro
+		{
+			get { return GetArticleIntro(this); }
+		}
+
+		/// <summary>Static getter for Article Intro</summary>
+		public static string GetArticleIntro(IArticleControls that) { return that.GetPropertyValue<string>("articleIntro"); }
+
+		///<summary>
+		/// Atricle Publish Date: Enter the date that this arcile was published (Figure out how to auto do this)
+		///</summary>
+		[ImplementPropertyType("atriclePublishDate")]
+		public DateTime AtriclePublishDate
+		{
+			get { return GetAtriclePublishDate(this); }
+		}
+
+		/// <summary>Static getter for Atricle Publish Date</summary>
+		public static DateTime GetAtriclePublishDate(IArticleControls that) { return that.GetPropertyValue<DateTime>("atriclePublishDate"); }
+	}
+
+	/// <summary>Blog Post</summary>
+	[PublishedContentModel("blogPost")]
+	public partial class BlogPost : PublishedContentModel, IArticleControls, IBasicContentControls, ISubHeaderControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "blogPost";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public BlogPost(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<BlogPost, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Article Category: Enter a category for the article
+		///</summary>
+		[ImplementPropertyType("articleCategory")]
+		public string ArticleCategory
+		{
+			get { return Umbraco.Web.PublishedContentModels.ArticleControls.GetArticleCategory(this); }
+		}
+
+		///<summary>
+		/// Article Intro: Enter the text to use as the introduction
+		///</summary>
+		[ImplementPropertyType("articleIntro")]
+		public string ArticleIntro
+		{
+			get { return Umbraco.Web.PublishedContentModels.ArticleControls.GetArticleIntro(this); }
+		}
+
+		///<summary>
+		/// Atricle Publish Date: Enter the date that this arcile was published (Figure out how to auto do this)
+		///</summary>
+		[ImplementPropertyType("atriclePublishDate")]
+		public DateTime AtriclePublishDate
+		{
+			get { return Umbraco.Web.PublishedContentModels.ArticleControls.GetAtriclePublishDate(this); }
+		}
+
+		///<summary>
+		/// Content Grid: Enter the content for the page
+		///</summary>
+		[ImplementPropertyType("contentGrid")]
+		public Newtonsoft.Json.Linq.JToken ContentGrid
+		{
+			get { return Umbraco.Web.PublishedContentModels.BasicContentControls.GetContentGrid(this); }
+		}
+
+		///<summary>
+		/// Large Heading: A large section heading that takes up the full width of the site
+		///</summary>
+		[ImplementPropertyType("largeHeading")]
+		public string LargeHeading
+		{
+			get { return Umbraco.Web.PublishedContentModels.SubHeaderControls.GetLargeHeading(this); }
 		}
 	}
 

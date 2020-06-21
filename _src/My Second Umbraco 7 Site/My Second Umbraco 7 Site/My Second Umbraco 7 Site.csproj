@@ -303,7 +303,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SiteLayoutController.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Models\BlogItem.cs" />
     <Compile Include="Models\BlogPreview.cs" />
+    <Compile Include="Models\Instagram.cs" />
     <Compile Include="Models\NavigationLink.cs" />
     <Compile Include="Models\NavigationListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -366,6 +368,7 @@
     <Content Include="Views\Partials\SiteLayout\_Slider.cshtml" />
     <Content Include="Views\Partials\SiteLayout\_FeaturedItems.cshtml" />
     <Content Include="Views\Partials\Blog\_PostList.cshtml" />
+    <Content Include="Views\BlogPost.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Umbraco.Core.Models;
 using Umbraco.Web;
@@ -14,16 +13,17 @@ namespace My_Second_Umbraco_7_Site.Controllers
     {
         private const string PartialViewDir = "~/Views/Partials/Blog/";
 
-        public ActionResult RenderPostList()
+        public ActionResult RenderPostList(int numberOfItems, bool horizontalLayout = false)
         {
-            List<BlogPreview> model = new List<BlogPreview>();
+            List<BlogItem> blogItems = new List<BlogItem>();
             IPublishedContent blogPage = CurrentPage.AncestorOrSelf(1).DescendantsOrSelf().Where(x => x.DocumentTypeAlias == "blog").FirstOrDefault();
            
-            foreach (IPublishedContent page in blogPage.Children.Where(x => x.DocumentTypeAlias == "blogPost").OrderByDescending(x => x.UpdateDate))
+            foreach (IPublishedContent page in blogPage.Children.Where(x => x.DocumentTypeAlias == "blogPost").OrderByDescending(x => x.UpdateDate).Take(numberOfItems))
             {
-                model.Add(new BlogPreview(page.GetPropertyValue<string>("largeHeading"), page.GetPropertyValue<string>("articleCategory"), page.GetPropertyValue<string>("articleIntro"), page.GetPropertyValue<DateTime>("atriclePublishDate"), page.Url));
+                blogItems.Add(new BlogItem(page.GetPropertyValue<string>("largeHeading"), page.GetPropertyValue<string>("articleCategory"), page.GetPropertyValue<string>("articleIntro"), page.GetPropertyValue<DateTime>("atriclePublishDate"), page.Url));
             }
 
+            BlogPreview model = new BlogPreview(blogItems, horizontalLayout);
             return PartialView($"{PartialViewDir}_PostList.cshtml", model);
         }
     }

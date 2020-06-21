@@ -19,14 +19,14 @@ using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "b4a6fa8d374dcf24")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "60193532437ac146")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
 	/// <summary>Home</summary>
 	[PublishedContentModel("home")]
-	public partial class Home : PublishedContentModel, IHero
+	public partial class Home : PublishedContentModel, IHero, IInstagramControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "home";
@@ -65,6 +65,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public IEnumerable<IPublishedContent> Slider
 		{
 			get { return Umbraco.Web.PublishedContentModels.Hero.GetSlider(this); }
+		}
+
+		///<summary>
+		/// Instagram Title: Enter a title for the Instagram seciton
+		///</summary>
+		[ImplementPropertyType("instagramTitle")]
+		public string InstagramTitle
+		{
+			get { return Umbraco.Web.PublishedContentModels.InstagramControls.GetInstagramTitle(this); }
 		}
 	}
 
@@ -668,6 +677,52 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			get { return Umbraco.Web.PublishedContentModels.SubHeaderControls.GetLargeHeading(this); }
 		}
+	}
+
+	// Mixin content Type 1123 with alias "instagramControls"
+	/// <summary>Instagram Controls</summary>
+	public partial interface IInstagramControls : IPublishedContent
+	{
+		/// <summary>Instagram Title</summary>
+		string InstagramTitle { get; }
+	}
+
+	/// <summary>Instagram Controls</summary>
+	[PublishedContentModel("instagramControls")]
+	public partial class InstagramControls : PublishedContentModel, IInstagramControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "instagramControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public InstagramControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<InstagramControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Instagram Title: Enter a title for the Instagram seciton
+		///</summary>
+		[ImplementPropertyType("instagramTitle")]
+		public string InstagramTitle
+		{
+			get { return GetInstagramTitle(this); }
+		}
+
+		/// <summary>Static getter for Instagram Title</summary>
+		public static string GetInstagramTitle(IInstagramControls that) { return that.GetPropertyValue<string>("instagramTitle"); }
 	}
 
 	/// <summary>Folder</summary>

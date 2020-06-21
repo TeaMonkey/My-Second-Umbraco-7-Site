@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using My_Second_Umbraco_7_Site.Models;
 using System.Linq;
-using System.Web;
-using Umbraco.Web.Mvc;
 using System.Web.Mvc;
+using Umbraco.Core.Models;
+using Umbraco.Web;
+using Umbraco.Web.Mvc;
 
 namespace My_Second_Umbraco_7_Site.Controllers
 {
@@ -23,7 +23,12 @@ namespace My_Second_Umbraco_7_Site.Controllers
 
         public ActionResult RenderInstagram()
         {
-            return PartialView($"{PartialViewDir}_Instagram.cshtml");
+            IPublishedContent homePage = Umbraco.TypedContentAtRoot().First();
+
+            string title = homePage.GetPropertyValue<string>("instagramTitle");
+
+            Instagram model = new Instagram(title);
+            return PartialView($"{PartialViewDir}_Instagram.cshtml", model);
         }
     }
 }

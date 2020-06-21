@@ -1,26 +1,16 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace My_Second_Umbraco_7_Site.Models
 {
     public class BlogPreview
     {
-        public string Name { get; set; }
-        public string Category { get; set; }
-        public string Intro { get; set; }
-        public DateTime PostDate { get; set; }
-        public string LinkUrl { get; set; }
+        public List<BlogItem> Item { get; set; } = new List<BlogItem>();
+        public bool HorizontalLayout { get; set; } = false;
 
-        public BlogPreview(string name, string category, string intro, DateTime postDate, string linkUrl)
+        public BlogPreview(List<BlogItem> item, bool horizontalLayout)
         {
-            Name = name;
-            Category = category;
-            Intro = intro;
-            PostDate = postDate;
-            LinkUrl = linkUrl;
+            Item = item;
+            HorizontalLayout = horizontalLayout;
         }
     }
 }

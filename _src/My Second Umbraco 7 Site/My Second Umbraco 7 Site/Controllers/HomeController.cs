@@ -1,4 +1,6 @@
 ﻿using My_Second_Umbraco_7_Site.Models;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using Umbraco.Core.Models;
@@ -26,8 +28,19 @@ namespace My_Second_Umbraco_7_Site.Controllers
             IPublishedContent homePage = Umbraco.TypedContentAtRoot().First();
 
             string title = homePage.GetPropertyValue<string>("instagramTitle");
+            List<InstagramPost> posts = new List<InstagramPost>();
 
-            Instagram model = new Instagram(title);
+            IEnumerable<IPublishedContent> items = homePage.GetPropertyValue<IEnumerable<IPublishedContent>>("instagramPostList");
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    string imageUrl = item.GetPropertyValue<IPublishedContent>("instagramImage").Url;
+                    posts.Add(new InstagramPost(imageUrl));
+                }
+            }
+
+            Instagram model = new Instagram(title, posts);
             return PartialView($"{PartialViewDir}_Instagram.cshtml", model);
         }
     }

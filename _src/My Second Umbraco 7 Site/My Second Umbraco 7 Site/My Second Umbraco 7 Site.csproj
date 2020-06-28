@@ -305,9 +305,12 @@
     <Compile Include="Helper.cs" />
     <Compile Include="Models\BlogItem.cs" />
     <Compile Include="Models\BlogPreview.cs" />
+    <Compile Include="Models\FeaturedItems.cs" />
     <Compile Include="Models\Instagram.cs" />
+    <Compile Include="Models\InstagramPost.cs" />
     <Compile Include="Models\NavigationLink.cs" />
     <Compile Include="Models\NavigationListItem.cs" />
+    <Compile Include="Models\Slider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

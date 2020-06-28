@@ -8,7 +8,7 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "60193532437ac146")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "4bc4cdffa93ae870")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -81,6 +81,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public IEnumerable<IPublishedContent> Slider
 		{
 			get { return Umbraco.Web.PublishedContentModels.Hero.GetSlider(this); }
+		}
+
+		///<summary>
+		/// Instagram Post List: Enter the instragram posts to display
+		///</summary>
+		[ImplementPropertyType("instagramPostList")]
+		public IEnumerable<IPublishedContent> InstagramPostList
+		{
+			get { return Umbraco.Web.PublishedContentModels.InstagramControls.GetInstagramPostList(this); }
 		}
 
 		///<summary>
@@ -699,6 +708,9 @@ namespace Umbraco.Web.PublishedContentModels
 	/// <summary>Instagram Controls</summary>
 	public partial interface IInstagramControls : IPublishedContent
 	{
+		/// <summary>Instagram Post List</summary>
+		IEnumerable<IPublishedContent> InstagramPostList { get; }
+
 		/// <summary>Instagram Title</summary>
 		string InstagramTitle { get; }
 	}
@@ -729,6 +741,18 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Instagram Post List: Enter the instragram posts to display
+		///</summary>
+		[ImplementPropertyType("instagramPostList")]
+		public IEnumerable<IPublishedContent> InstagramPostList
+		{
+			get { return GetInstagramPostList(this); }
+		}
+
+		/// <summary>Static getter for Instagram Post List</summary>
+		public static IEnumerable<IPublishedContent> GetInstagramPostList(IInstagramControls that) { return that.GetPropertyValue<IEnumerable<IPublishedContent>>("instagramPostList"); }
+
+		///<summary>
 		/// Instagram Title: Enter a title for the Instagram seciton
 		///</summary>
 		[ImplementPropertyType("instagramTitle")]
@@ -739,6 +763,41 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Static getter for Instagram Title</summary>
 		public static string GetInstagramTitle(IInstagramControls that) { return that.GetPropertyValue<string>("instagramTitle"); }
+	}
+
+	/// <summary>Instagram Post</summary>
+	[PublishedContentModel("instagramPost")]
+	public partial class InstagramPost : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "instagramPost";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public InstagramPost(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<InstagramPost, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Instagram Image: Choose a image to represent the Instagram post
+		///</summary>
+		[ImplementPropertyType("instagramImage")]
+		public IPublishedContent InstagramImage
+		{
+			get { return this.GetPropertyValue<IPublishedContent>("instagramImage"); }
+		}
 	}
 
 	/// <summary>Folder</summary>

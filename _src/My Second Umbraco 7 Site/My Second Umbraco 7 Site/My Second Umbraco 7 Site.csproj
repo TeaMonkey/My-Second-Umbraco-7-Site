@@ -320,11 +320,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SiteLayoutController.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Models\BlogItem.cs" />
     <Compile Include="Models\BlogPreview.cs" />
+    <Compile Include="Models\ContactForm.cs" />
     <Compile Include="Models\FeaturedItems.cs" />
     <Compile Include="Models\Instagram.cs" />
     <Compile Include="Models\InstagramPost.cs" />
@@ -392,6 +394,7 @@
     <Content Include="Views\Partials\SiteLayout\_FeaturedItems.cshtml" />
     <Content Include="Views\Partials\Blog\_PostList.cshtml" />
     <Content Include="Views\BlogPost.cshtml" />
+    <Content Include="Views\Partials\Contact\_ContactForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

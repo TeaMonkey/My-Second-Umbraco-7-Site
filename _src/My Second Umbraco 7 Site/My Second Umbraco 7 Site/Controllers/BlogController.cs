@@ -19,7 +19,8 @@ namespace My_Second_Umbraco_7_Site.Controllers
         public ActionResult RenderPostList(int numberOfItems, bool horizontalLayout = false)
         {
             List<BlogItem> blogItems = new List<BlogItem>();
-            IPublishedContent blogPage = CurrentPage.AncestorOrSelf(1).DescendantsOrSelf().Where(x => x.DocumentTypeAlias == "blog").FirstOrDefault();
+            IPublishedContent homePage = Umbraco.TypedContentAtRoot().First();
+            IPublishedContent blogPage = homePage.Children.FirstOrDefault(x => x.DocumentTypeAlias == "blog");
            
             foreach (IPublishedContent page in blogPage.Children.Where(x => x.DocumentTypeAlias == "blogPost").OrderByDescending(x => x.UpdateDate).Take(numberOfItems))
             {

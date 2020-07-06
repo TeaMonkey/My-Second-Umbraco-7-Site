@@ -1,8 +1,6 @@
 ﻿using My_Second_Umbraco_7_Site.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Umbraco.Core.Models;
 using Umbraco.Web;
@@ -12,32 +10,35 @@ namespace My_Second_Umbraco_7_Site.Controllers
 {
     public class SiteLayoutController : SurfaceController
     {
-        private const string PartialViewDir = "~/Views/Partials/SiteLayout/";
+        private string PartialViewPath(string partialViewName)
+        {
+            return $"~/Views/Partials/SiteLayout/{partialViewName}.cshtml";
+        }
 
         public ActionResult RenderHeader()
         {
             List<NavigationListItem> nav = Helper.GetObjectFromCache("headerNav", 20, GetNavigationModelFromUmbraco);
-            return PartialView($"{PartialViewDir}_Header.cshtml", nav);
+            return PartialView(PartialViewPath("_Header"), nav);
         }
 
         public ActionResult RenderFooter()
         {
-            return PartialView($"{PartialViewDir}_Footer.cshtml");
+            return PartialView(PartialViewPath("_Footer"));
         }
 
         public ActionResult RenderSignup()
         {
-            return PartialView($"{PartialViewDir}_Signup.cshtml");
+            return PartialView(PartialViewPath("_Signup"));
         }
 
         public ActionResult RenderExpandedHeader()
         {
-            return PartialView($"{PartialViewDir}_ExpandedHeader.cshtml");
+            return PartialView(PartialViewPath("_ExpandedHeader"));
         }
 
         public ActionResult RenderLargeHeadingControl()
         {
-            return PartialView($"{PartialViewDir}_LargeHeaderControl.cshtml");
+            return PartialView(PartialViewPath("_LargeHeaderControl"));
         }
 
         private List<NavigationListItem> GetNavigationModelFromUmbraco()

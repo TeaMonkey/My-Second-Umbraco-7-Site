@@ -1,6 +1,5 @@
 ﻿using My_Second_Umbraco_7_Site.Models;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using Umbraco.Core.Models;
@@ -11,16 +10,19 @@ namespace My_Second_Umbraco_7_Site.Controllers
 {
     public class HomeController : SurfaceController
     {
-        private const string PartialViewDir = "~/Views/Partials/Home/";
+        private string PartialViewPath(string partialViewName)
+        {
+            return $"~/Views/Partials/Home/{partialViewName}.cshtml";
+        }
 
         public ActionResult RenderHero()
         {
-            return PartialView($"{PartialViewDir}_Hero.cshtml");
+            return PartialView(PartialViewPath("_Hero"));
         }
 
         public ActionResult RenderPopular()
         {
-            return PartialView($"{PartialViewDir}_Popular.cshtml");
+            return PartialView(PartialViewPath("_Popular"));
         }
 
         public ActionResult RenderInstagram()
@@ -41,7 +43,7 @@ namespace My_Second_Umbraco_7_Site.Controllers
             }
 
             Instagram model = new Instagram(title, posts);
-            return PartialView($"{PartialViewDir}_Instagram.cshtml", model);
+            return PartialView(PartialViewPath("_Instagram"), model);
         }
     }
 }

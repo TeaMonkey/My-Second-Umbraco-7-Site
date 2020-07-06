@@ -11,7 +11,10 @@ namespace My_Second_Umbraco_7_Site.Controllers
 {
     public class BlogController : SurfaceController
     {
-        private const string PartialViewDir = "~/Views/Partials/Blog/";
+        private string PartialViewPath(string partialViewName)
+        {
+            return $"~/Views/Partials/Blog/{partialViewName}.cshtml";
+        }
 
         public ActionResult RenderPostList(int numberOfItems, bool horizontalLayout = false)
         {
@@ -24,7 +27,7 @@ namespace My_Second_Umbraco_7_Site.Controllers
             }
 
             BlogPreview model = new BlogPreview(blogItems, horizontalLayout);
-            return PartialView($"{PartialViewDir}_PostList.cshtml", model);
+            return PartialView(PartialViewPath("_PostList"), model);
         }
     }
 }

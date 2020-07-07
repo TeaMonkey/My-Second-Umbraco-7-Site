@@ -305,6 +305,7 @@
     <Content Include="default.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Compile Include="Models\Staff.cs" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -312,6 +313,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Partials\SiteLayout\_Footer.cshtml" />
@@ -323,7 +329,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SiteLayoutController.cs" />
-    <Compile Include="Helper.cs" />
+    <Compile Include="Helpers\CacheHelper.cs" />
     <Compile Include="Models\BlogItem.cs" />
     <Compile Include="Models\BlogPreview.cs" />
     <Compile Include="Models\ContactForm.cs" />
@@ -395,6 +401,7 @@
     <Content Include="Views\Partials\Blog\_PostList.cshtml" />
     <Content Include="Views\BlogPost.cshtml" />
     <Content Include="Views\Partials\Contact\_ContactForm.cshtml" />
+    <Content Include="Views\Partials\SiteLayout\_Staff.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

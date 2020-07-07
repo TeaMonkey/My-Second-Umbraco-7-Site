@@ -8,7 +8,7 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "4bc4cdffa93ae870")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "c7e00d7b0a342acc")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -104,7 +104,7 @@ namespace Umbraco.Web.PublishedContentModels
 
 	/// <summary>Blog</summary>
 	[PublishedContentModel("blog")]
-	public partial class Blog : PublishedContentModel, ISubHeaderControls
+	public partial class Blog : PublishedContentModel, IAboutControls, ISubHeaderControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "blog";
@@ -128,6 +128,78 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
+		/// Staff Dribbble: Enter the staff members Dribbble link
+		///</summary>
+		[ImplementPropertyType("staffDribbble")]
+		public Umbraco.Web.Models.Link StaffDribbble
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffDribbble(this); }
+		}
+
+		///<summary>
+		/// Staff Facebook: Enter the staff members Facebook link
+		///</summary>
+		[ImplementPropertyType("staffFacebook")]
+		public Umbraco.Web.Models.Link StaffFacebook
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffFacebook(this); }
+		}
+
+		///<summary>
+		/// Staff Github: Enter the staff members Github link
+		///</summary>
+		[ImplementPropertyType("staffGithub")]
+		public Umbraco.Web.Models.Link StaffGithub
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffGithub(this); }
+		}
+
+		///<summary>
+		/// Staff Image: Enter the image to use for the staff member
+		///</summary>
+		[ImplementPropertyType("staffImage")]
+		public IPublishedContent StaffImage
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffImage(this); }
+		}
+
+		///<summary>
+		/// Staff Informaiton: Enter some information about this staff member
+		///</summary>
+		[ImplementPropertyType("staffInformaiton")]
+		public string StaffInformaiton
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffInformaiton(this); }
+		}
+
+		///<summary>
+		/// Staff Name: Enter the name of the staff member
+		///</summary>
+		[ImplementPropertyType("staffName")]
+		public string StaffName
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffName(this); }
+		}
+
+		///<summary>
+		/// Staff Role: Enter the staff members role
+		///</summary>
+		[ImplementPropertyType("staffRole")]
+		public string StaffRole
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffRole(this); }
+		}
+
+		///<summary>
+		/// Staff Twitter: Enter the staff members Twitter link
+		///</summary>
+		[ImplementPropertyType("staffTwitter")]
+		public Umbraco.Web.Models.Link StaffTwitter
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffTwitter(this); }
+		}
+
+		///<summary>
 		/// Large Heading: A large section heading that takes up the full width of the site
 		///</summary>
 		[ImplementPropertyType("largeHeading")]
@@ -139,7 +211,7 @@ namespace Umbraco.Web.PublishedContentModels
 
 	/// <summary>Contact</summary>
 	[PublishedContentModel("contact")]
-	public partial class Contact : PublishedContentModel, ISubHeaderControls
+	public partial class Contact : PublishedContentModel, IAboutControls, ISubHeaderControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "contact";
@@ -160,6 +232,78 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Contact, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Staff Dribbble: Enter the staff members Dribbble link
+		///</summary>
+		[ImplementPropertyType("staffDribbble")]
+		public Umbraco.Web.Models.Link StaffDribbble
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffDribbble(this); }
+		}
+
+		///<summary>
+		/// Staff Facebook: Enter the staff members Facebook link
+		///</summary>
+		[ImplementPropertyType("staffFacebook")]
+		public Umbraco.Web.Models.Link StaffFacebook
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffFacebook(this); }
+		}
+
+		///<summary>
+		/// Staff Github: Enter the staff members Github link
+		///</summary>
+		[ImplementPropertyType("staffGithub")]
+		public Umbraco.Web.Models.Link StaffGithub
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffGithub(this); }
+		}
+
+		///<summary>
+		/// Staff Image: Enter the image to use for the staff member
+		///</summary>
+		[ImplementPropertyType("staffImage")]
+		public IPublishedContent StaffImage
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffImage(this); }
+		}
+
+		///<summary>
+		/// Staff Informaiton: Enter some information about this staff member
+		///</summary>
+		[ImplementPropertyType("staffInformaiton")]
+		public string StaffInformaiton
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffInformaiton(this); }
+		}
+
+		///<summary>
+		/// Staff Name: Enter the name of the staff member
+		///</summary>
+		[ImplementPropertyType("staffName")]
+		public string StaffName
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffName(this); }
+		}
+
+		///<summary>
+		/// Staff Role: Enter the staff members role
+		///</summary>
+		[ImplementPropertyType("staffRole")]
+		public string StaffRole
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffRole(this); }
+		}
+
+		///<summary>
+		/// Staff Twitter: Enter the staff members Twitter link
+		///</summary>
+		[ImplementPropertyType("staffTwitter")]
+		public Umbraco.Web.Models.Link StaffTwitter
+		{
+			get { return Umbraco.Web.PublishedContentModels.AboutControls.GetStaffTwitter(this); }
 		}
 
 		///<summary>
@@ -798,6 +942,157 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			get { return this.GetPropertyValue<IPublishedContent>("instagramImage"); }
 		}
+	}
+
+	// Mixin content Type 1135 with alias "aboutControls"
+	/// <summary>Staff Controls</summary>
+	public partial interface IAboutControls : IPublishedContent
+	{
+		/// <summary>Staff Dribbble</summary>
+		Umbraco.Web.Models.Link StaffDribbble { get; }
+
+		/// <summary>Staff Facebook</summary>
+		Umbraco.Web.Models.Link StaffFacebook { get; }
+
+		/// <summary>Staff Github</summary>
+		Umbraco.Web.Models.Link StaffGithub { get; }
+
+		/// <summary>Staff Image</summary>
+		IPublishedContent StaffImage { get; }
+
+		/// <summary>Staff Informaiton</summary>
+		string StaffInformaiton { get; }
+
+		/// <summary>Staff Name</summary>
+		string StaffName { get; }
+
+		/// <summary>Staff Role</summary>
+		string StaffRole { get; }
+
+		/// <summary>Staff Twitter</summary>
+		Umbraco.Web.Models.Link StaffTwitter { get; }
+	}
+
+	/// <summary>Staff Controls</summary>
+	[PublishedContentModel("aboutControls")]
+	public partial class AboutControls : PublishedContentModel, IAboutControls
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "aboutControls";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public AboutControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<AboutControls, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Staff Dribbble: Enter the staff members Dribbble link
+		///</summary>
+		[ImplementPropertyType("staffDribbble")]
+		public Umbraco.Web.Models.Link StaffDribbble
+		{
+			get { return GetStaffDribbble(this); }
+		}
+
+		/// <summary>Static getter for Staff Dribbble</summary>
+		public static Umbraco.Web.Models.Link GetStaffDribbble(IAboutControls that) { return that.GetPropertyValue<Umbraco.Web.Models.Link>("staffDribbble"); }
+
+		///<summary>
+		/// Staff Facebook: Enter the staff members Facebook link
+		///</summary>
+		[ImplementPropertyType("staffFacebook")]
+		public Umbraco.Web.Models.Link StaffFacebook
+		{
+			get { return GetStaffFacebook(this); }
+		}
+
+		/// <summary>Static getter for Staff Facebook</summary>
+		public static Umbraco.Web.Models.Link GetStaffFacebook(IAboutControls that) { return that.GetPropertyValue<Umbraco.Web.Models.Link>("staffFacebook"); }
+
+		///<summary>
+		/// Staff Github: Enter the staff members Github link
+		///</summary>
+		[ImplementPropertyType("staffGithub")]
+		public Umbraco.Web.Models.Link StaffGithub
+		{
+			get { return GetStaffGithub(this); }
+		}
+
+		/// <summary>Static getter for Staff Github</summary>
+		public static Umbraco.Web.Models.Link GetStaffGithub(IAboutControls that) { return that.GetPropertyValue<Umbraco.Web.Models.Link>("staffGithub"); }
+
+		///<summary>
+		/// Staff Image: Enter the image to use for the staff member
+		///</summary>
+		[ImplementPropertyType("staffImage")]
+		public IPublishedContent StaffImage
+		{
+			get { return GetStaffImage(this); }
+		}
+
+		/// <summary>Static getter for Staff Image</summary>
+		public static IPublishedContent GetStaffImage(IAboutControls that) { return that.GetPropertyValue<IPublishedContent>("staffImage"); }
+
+		///<summary>
+		/// Staff Informaiton: Enter some information about this staff member
+		///</summary>
+		[ImplementPropertyType("staffInformaiton")]
+		public string StaffInformaiton
+		{
+			get { return GetStaffInformaiton(this); }
+		}
+
+		/// <summary>Static getter for Staff Informaiton</summary>
+		public static string GetStaffInformaiton(IAboutControls that) { return that.GetPropertyValue<string>("staffInformaiton"); }
+
+		///<summary>
+		/// Staff Name: Enter the name of the staff member
+		///</summary>
+		[ImplementPropertyType("staffName")]
+		public string StaffName
+		{
+			get { return GetStaffName(this); }
+		}
+
+		/// <summary>Static getter for Staff Name</summary>
+		public static string GetStaffName(IAboutControls that) { return that.GetPropertyValue<string>("staffName"); }
+
+		///<summary>
+		/// Staff Role: Enter the staff members role
+		///</summary>
+		[ImplementPropertyType("staffRole")]
+		public string StaffRole
+		{
+			get { return GetStaffRole(this); }
+		}
+
+		/// <summary>Static getter for Staff Role</summary>
+		public static string GetStaffRole(IAboutControls that) { return that.GetPropertyValue<string>("staffRole"); }
+
+		///<summary>
+		/// Staff Twitter: Enter the staff members Twitter link
+		///</summary>
+		[ImplementPropertyType("staffTwitter")]
+		public Umbraco.Web.Models.Link StaffTwitter
+		{
+			get { return GetStaffTwitter(this); }
+		}
+
+		/// <summary>Static getter for Staff Twitter</summary>
+		public static Umbraco.Web.Models.Link GetStaffTwitter(IAboutControls that) { return that.GetPropertyValue<Umbraco.Web.Models.Link>("staffTwitter"); }
 	}
 
 	/// <summary>Folder</summary>

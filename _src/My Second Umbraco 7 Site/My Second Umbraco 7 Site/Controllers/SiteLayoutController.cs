@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Umbraco.Core.Models;
 using Umbraco.Web;
+using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
 namespace My_Second_Umbraco_7_Site.Controllers
@@ -69,6 +70,16 @@ namespace My_Second_Umbraco_7_Site.Controllers
             }
 
             return listItems;
+        }
+
+        public ActionResult RenderStaffControl()
+        {
+            //TODO - Add support for when the content has not been set
+
+
+            Staff staffModel = new Staff(CurrentPage.GetPropertyValue<string>("staffName"), CurrentPage.GetPropertyValue<IPublishedContent>("staffImage").Url, CurrentPage.GetPropertyValue<string>("staffRole"), CurrentPage.GetPropertyValue<string>("staffInformaiton"), CurrentPage.GetPropertyValue<Link>("staffFacebook").Url, CurrentPage.GetPropertyValue<Link>("staffTwitter").Url, CurrentPage.GetPropertyValue<Link>("staffDribbble").Url, CurrentPage.GetPropertyValue<Link>("staffGithub").Url);
+
+            return PartialView(PartialViewPath("_Staff"), staffModel);
         }
     }
 }

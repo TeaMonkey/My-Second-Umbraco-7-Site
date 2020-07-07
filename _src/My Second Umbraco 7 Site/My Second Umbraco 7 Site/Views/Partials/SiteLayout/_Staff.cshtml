@@ -1,0 +1,18 @@
+﻿@model Staff
+@using My_Second_Umbraco_7_Site.Models
+
+<div class="col-md-12 col-md-offset-0 text-center fh5co-heading fh5co-heading-sidebar">
+    <h2><span>About Me</span></h2>
+</div>
+<div class="fh5co-staff">
+    <img src="@Model.ImageUrl" alt="Free HTML5 Templates by FreeHTML5.co">
+    <h3>@Model.Name</h3>
+    <strong class="role">@Model.Role</strong>
+    <p>@Model.Informaiton</p>
+    <ul class="fh5co-social-icons">
+        <li><a href="@Model.FacebookLink"><i class="icon-facebook"></i></a></li>
+        <li><a href="@Model.TwitterLink"><i class="icon-twitter"></i></a></li>
+        <li><a href="@Model.DribbbleLink"><i class="icon-dribbble"></i></a></li>
+        <li><a href="@Model.GithubLink"><i class="icon-github"></i></a></li>
+    </ul>
+</div>

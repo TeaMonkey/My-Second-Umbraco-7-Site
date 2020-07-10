@@ -8,7 +8,7 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "c7e00d7b0a342acc")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "1e021d2b089299e")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -1093,6 +1093,32 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Static getter for Staff Twitter</summary>
 		public static Umbraco.Web.Models.Link GetStaffTwitter(IAboutControls that) { return that.GetPropertyValue<Umbraco.Web.Models.Link>("staffTwitter"); }
+	}
+
+	/// <summary>Search</summary>
+	[PublishedContentModel("search")]
+	public partial class Search : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "search";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public Search(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Search, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
 	}
 
 	/// <summary>Folder</summary>

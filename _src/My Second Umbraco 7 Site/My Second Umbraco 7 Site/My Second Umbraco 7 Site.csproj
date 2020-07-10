@@ -305,6 +305,12 @@
     <Content Include="default.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Helpers\SearchHelper.cs" />
+    <Compile Include="Models\PagingBounds.cs" />
+    <Compile Include="Models\SearchGroup.cs" />
+    <Compile Include="Models\SearchResults.cs" />
+    <Compile Include="Models\SearchView.cs" />
     <Compile Include="Models\Staff.cs" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -314,6 +320,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -402,6 +410,9 @@
     <Content Include="Views\BlogPost.cshtml" />
     <Content Include="Views\Partials\Contact\_ContactForm.cshtml" />
     <Content Include="Views\Partials\SiteLayout\_Staff.cshtml" />
+    <Content Include="Views\Search.cshtml" />
+    <Content Include="Views\Partials\Search\_SearchResults.cshtml" />
+    <Content Include="Views\Partials\Search\_SearchForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

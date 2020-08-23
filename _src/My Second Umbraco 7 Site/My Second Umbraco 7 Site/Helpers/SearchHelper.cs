@@ -4,7 +4,6 @@ using My_Second_Umbraco_7_Site.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 using UmbracoExamine;
@@ -45,9 +44,9 @@ namespace My_Second_Umbraco_7_Site.Helpers
             ISearchResults allResults = SearchUsingExamine(searchModel.DocTypeAliases.Split(','), searchModel.SearchGroups);
             resultsModel.TotalItemCount = allResults.TotalItemCount;
             resultsModel.Results = GetResultsForThisPage(allResults, resultsModel.PageNumber, searchModel.PageSize);
-
             resultsModel.PageCount = Convert.ToInt32(Math.Ceiling((decimal)resultsModel.TotalItemCount / (decimal)searchModel.PageSize));
             resultsModel.PagingBoundsModel = GetPagingBounds(resultsModel.PageCount, resultsModel.PageNumber, searchModel.PagingGroupSize);
+
             return resultsModel;
         }
 
@@ -93,7 +92,7 @@ namespace My_Second_Umbraco_7_Site.Helpers
                 foreach (SearchGroup searchGroup in searchGroups)
                 {
                     queryNodes = queryNodes.And().GroupedOr(searchGroup.FieldsToSearchIn, searchGroup.SearchTerms);
-                //   queryNodes = queryNodes.And().GroupedOr()
+                    //   queryNodes = queryNodes.And().GroupedOr()
                 }
             }
 
@@ -111,21 +110,22 @@ namespace My_Second_Umbraco_7_Site.Helpers
             int pageNumber = 1;
             const string NAME_PREFIX = "page";
             const char NAME_SEPARATOR = '-';
+
             if (formKeys != null)
             {
                 string pagingButtonName = formKeys.Where(x => x.Length > NAME_PREFIX.Length && x.Substring(0, NAME_PREFIX.Length).ToLower() == NAME_PREFIX).FirstOrDefault();
+
                 if (!string.IsNullOrEmpty(pagingButtonName))
                 {
                     string[] pagingButtonNameParts = pagingButtonName.Split(NAME_SEPARATOR);
+
                     if (pagingButtonNameParts.Length > 1)
                     {
-                        if (!int.TryParse(pagingButtonNameParts[1], out pageNumber))
-                        {
-                            //pageNumber already set in tryparse
-                        }
+                        int.TryParse(pagingButtonNameParts[1], out pageNumber);
                     }
                 }
             }
+
             return pageNumber;
         }
 
@@ -142,6 +142,7 @@ namespace My_Second_Umbraco_7_Site.Helpers
             int pagesBeforeMiddle = groupSize - (int)middlePageNumber;
             int pagesAfterMiddle = groupSize - (pagesBeforeMiddle + 1);
             int startPage = 1;
+
             if (pageNumber >= middlePageNumber)
             {
                 startPage = pageNumber - pagesBeforeMiddle;
@@ -150,13 +151,17 @@ namespace My_Second_Umbraco_7_Site.Helpers
             {
                 pagesAfterMiddle = groupSize - pageNumber;
             }
+
             int endPage = pageCount;
+
             if (pageCount >= (pageNumber + pagesAfterMiddle))
             {
                 endPage = (pageNumber + pagesAfterMiddle);
             }
+
             bool showFirstButton = startPage > 1;
             bool showLastButton = endPage < pageCount;
+
             return new PagingBounds(startPage, endPage, showFirstButton, showLastButton);
         }
 

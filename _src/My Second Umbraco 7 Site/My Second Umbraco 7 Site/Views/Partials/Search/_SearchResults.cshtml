@@ -2,6 +2,8 @@
 
 @if (Model != null)
 {
+    <p></p>
+
     if (Model.HasResults)
     {
         <p>Your search for <strong>@Model.SearchTerm</strong> returned @Model.TotalItemCount result@(Model.TotalItemCount != 1 ? "s" : null)</p>
@@ -13,6 +15,7 @@
         </div>
 
         <div class="row">
+            <p></p>
             @foreach (IPublishedContent result in Model.Results)
             {
                 <div class="col-xs-12">
@@ -21,11 +24,19 @@
                 </div>
             }
         </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                @RenderPagingButtons(Model.PagingBoundsModel, Model.PageNumber, Model.PageCount)
+            </div>
+        </div>
     }
     else
     {
         <p>No results to display</p>
     }
+
+    <p></p>
 }
 
 @helper RenderPagingButtons(My_Second_Umbraco_7_Site.Models.PagingBounds pagingBounds, int pageNumber, int pageCount)

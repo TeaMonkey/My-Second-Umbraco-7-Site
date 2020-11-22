@@ -305,8 +305,10 @@
     <Content Include="default.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Helpers\SearchHelper.cs" />
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\PagingBounds.cs" />
     <Compile Include="Models\SearchGroup.cs" />
     <Compile Include="Models\SearchResults.cs" />
@@ -413,6 +415,9 @@
     <Content Include="Views\Search.cshtml" />
     <Content Include="Views\Partials\Search\_SearchResults.cshtml" />
     <Content Include="Views\Partials\Search\_SearchForm.cshtml" />
+    <Content Include="Views\Login.cshtml" />
+    <Content Include="Views\Partials\Member\_Login.cshtml" />
+    <Content Include="Views\Partials\Member\_Logout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -423,6 +428,9 @@
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Member\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
